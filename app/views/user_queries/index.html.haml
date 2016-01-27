@@ -1,0 +1,23 @@
+%h1 Listing user_queries
+
+%table
+  %thead
+    %tr
+      %th Product
+      %th Search text
+      %th
+      %th
+      %th
+
+  %tbody
+    - @user_queries.each do |user_query|
+      %tr
+        %td= user_query.product_id
+        %td= user_query.search_text
+        %td= link_to 'Show', user_query
+        %td= link_to 'Edit', edit_user_query_path(user_query)
+        %td= link_to 'Destroy', user_query, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New User query', new_user_query_path

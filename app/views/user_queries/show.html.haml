@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Product:
+  = @user_query.product_id
+%p
+  %b Search text:
+  = @user_query.search_text
+
+= link_to 'Edit', edit_user_query_path(@user_query)
+\|
+= link_to 'Back', user_queries_path
