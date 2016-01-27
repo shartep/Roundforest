@@ -6,6 +6,5 @@ class CreateUserQueries < ActiveRecord::Migration
 
       t.timestamps null: false
     end
-    add_foreign_key :user_queries, :products
   end
 end
