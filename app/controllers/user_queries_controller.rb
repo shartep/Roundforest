@@ -10,6 +10,8 @@ class UserQueriesController < ApplicationController
   # GET /user_queries/1
   # GET /user_queries/1.json
   def show
+    st = "%#{@user_query.search_text}%"
+    @actual_reviews = @user_query.reviews.where('LOWER(content) LIKE LOWER(?)', st)
   end
 
   # GET /user_queries/new

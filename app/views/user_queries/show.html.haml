@@ -8,11 +8,12 @@
   = @user_query.search_text
 
 %br
-= @user_query.reviews.each do |review|
-  %p
-    %b
-      = review.content
-  %br
+  - @actual_reviews.each do |review|
+    %div
+      %p
+        %b
+          = review.content
+    %br
 
 %br
 = link_to 'Edit', edit_user_query_path(@user_query)
