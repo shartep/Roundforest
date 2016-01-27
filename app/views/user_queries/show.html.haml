@@ -7,6 +7,14 @@
   %b Search text:
   = @user_query.search_text
 
+%br
+= @user_query.reviews.each do |review|
+  %p
+    %b
+      = review.content
+  %br
+
+%br
 = link_to 'Edit', edit_user_query_path(@user_query)
 \|
 = link_to 'Back', user_queries_path
