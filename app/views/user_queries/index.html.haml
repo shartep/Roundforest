@@ -12,7 +12,7 @@
   %tbody
     - @user_queries.each do |user_query|
       %tr
-        %td= user_query.product_id
+        %td= user_query.product.code
         %td= user_query.search_text
         %td= link_to 'Show', user_query
         %td= link_to 'Edit', edit_user_query_path(user_query)

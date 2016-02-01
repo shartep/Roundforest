@@ -7,8 +7,9 @@
           %li= msg
 
   .field
-    = f.label :product_id, 'Product ID'
-    = f.text_field :product_id
+    = f.fields_for :product do |ff|
+      = ff.label :code, 'Product ID'
+      = ff.text_field :code
   .field
     = f.label :search_text
     = f.text_field :search_text

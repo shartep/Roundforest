@@ -10,8 +10,6 @@ class UserQueriesController < ApplicationController
   # GET /user_queries/1
   # GET /user_queries/1.json
   def show
-    st = "%#{@user_query.search_text}%"
-    @actual_reviews = @user_query.reviews.where('LOWER(content) LIKE LOWER(?)', st)
   end
 
   # GET /user_queries/new
@@ -26,7 +24,9 @@ class UserQueriesController < ApplicationController
   # POST /user_queries
   # POST /user_queries.json
   def create
-    @user_query = UserQuery.new(user_query_params)
+    uq_params = user_query_params
+    product = Product.find_or_create_by(code: uq_params[:product][:code])
+    @user_query = UserQuery.new(search_text: uq_params[:search_text], product: product)
 
     respond_to do |format|
       if @user_query.save
@@ -71,6 +71,6 @@ class UserQueriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_query_params
-      params.require(:user_query).permit(:product_id, :search_text)
+      params.require(:user_query).permit(:search_text, product: [:code])
     end
 end

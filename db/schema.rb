@@ -11,16 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160127101835) do
+ActiveRecord::Schema.define(version: 20160201184252) do
 
-  create_table "reviews", force: :cascade do |t|
-    t.integer  "user_query_id"
-    t.text     "content"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "products", force: :cascade do |t|
+    t.integer  "code"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  add_index "reviews", ["user_query_id"], name: "index_reviews_on_user_query_id"
+  create_table "reviews", force: :cascade do |t|
+    t.integer  "product_id"
+    t.text     "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "reviews", ["product_id"], name: "index_reviews_on_product_id", using: :btree
 
   create_table "user_queries", force: :cascade do |t|
     t.integer  "product_id"
@@ -29,6 +39,6 @@ ActiveRecord::Schema.define(version: 20160127101835) do
     t.datetime "updated_at",  null: false
   end
 
-  add_index "user_queries", ["product_id"], name: "index_user_queries_on_product_id"
+  add_index "user_queries", ["product_id"], name: "index_user_queries_on_product_id", using: :btree
 
 end

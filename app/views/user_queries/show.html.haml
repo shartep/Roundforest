@@ -2,20 +2,27 @@
 
 %p
   %b Product:
-  = @user_query.product_id
+  = @user_query.product.code
 %p
   %b Search text:
   = @user_query.search_text
 
 %br
-  - @actual_reviews.each do |review|
+  - reviews = @user_query.reviews
+  - if reviews.any?
+    - reviews.each do |review|
+      %div
+        %p
+          %b
+            = review.content
+      %br
+  - else
     %div
       %p
         %b
-          = review.content
-    %br
-
+          There is no any review according to you search query
 %br
+
 = link_to 'Edit', edit_user_query_path(@user_query)
 \|
 = link_to 'Back', user_queries_path
