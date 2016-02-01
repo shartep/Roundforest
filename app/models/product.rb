@@ -7,7 +7,7 @@ class Product < ActiveRecord::Base
   def reload_reviews
     agent = Mechanize.new
     reviews = []
-    (1..30).each do |i|
+    (1..20).each do |i|
       page = agent.get("https://www.walmart.com/reviews/product/#{self.code}?limit=20&page=#{i}&sort=relevancy")
       reviews += page.css('p.js-customer-review-text').to_a.map(&:content).uniq
     end
